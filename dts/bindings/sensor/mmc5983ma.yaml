@@ -1,0 +1,12 @@
+compatible: "memsic,mmc5983ma"
+
+include: [base.yaml, i2c-device.yaml, sensor-device.yaml]
+
+description: |
+  MMC5983MA Magnetic Sensor
+
+properties:
+  irq-gpios:
+    type: phandle-array
+    description: |
+      The INT signal connection.
