@@ -153,8 +153,8 @@ static int write_register(const struct device *dev, enum mmc5983ma_register addr
 static void channel_magn_convert(struct sensor_value * val, struct mmc5983ma_reg_mag reg) {
 	//TODO tempeature compensation
 	double step = 0.25; //.25mG lsb
-	uint16_t * regval = (uint16_t*)&reg;
-	double dblval = step * (*regval);
+	uint16_t regval = ((*(uint16_t*)&reg)>>8) | ((*(uint16_t*)&reg)<<8);
+	double dblval = step * regval - 0x2000;
 	double integer;
 
 	val->val2 = (int32_t)(modf(dblval, &integer) * 1000000);
